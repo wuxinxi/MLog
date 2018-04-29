@@ -17,12 +17,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import static com.szxb.mlog.MLog.ASSERT;
-import static com.szxb.mlog.MLog.DEBUG;
-import static com.szxb.mlog.MLog.ERROR;
-import static com.szxb.mlog.MLog.INFO;
-import static com.szxb.mlog.MLog.VERBOSE;
-import static com.szxb.mlog.MLog.WARN;
+import static com.szxb.mlog.SLog.ASSERT;
+import static com.szxb.mlog.SLog.DEBUG;
+import static com.szxb.mlog.SLog.ERROR;
+import static com.szxb.mlog.SLog.INFO;
+import static com.szxb.mlog.SLog.VERBOSE;
+import static com.szxb.mlog.SLog.WARN;
 
 
 class LoggerPrinter implements Printer {

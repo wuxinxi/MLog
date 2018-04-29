@@ -150,7 +150,7 @@ public class PrettyFormatStrategy implements FormatStrategy {
     for (int i = MIN_STACK_OFFSET; i < trace.length; i++) {
       StackTraceElement e = trace[i];
       String name = e.getClassName();
-      if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(MLog.class.getName())) {
+      if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(SLog.class.getName())) {
         return --i;
       }
     }

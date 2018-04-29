@@ -3,7 +3,7 @@ package com.szxb.mlog;
 /**
  * But more pretty, simple and powerful
  */
-public final class MLog {
+public final class SLog {
 
   public static final int VERBOSE = 2;
   public static final int DEBUG = 3;
@@ -14,12 +14,12 @@ public final class MLog {
 
   private static Printer printer = new LoggerPrinter();
 
-  private MLog() {
+  private SLog() {
     //no instance
   }
 
   public static void printer(Printer printer) {
-    MLog.printer = printer;
+    SLog.printer = printer;
   }
 
   public static void addLogAdapter(LogAdapter adapter) {
