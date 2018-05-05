@@ -30,11 +30,13 @@ public class DiskLogStrategy implements LogStrategy {
 
         private final String folder;
         private final int maxFileSize;
+        private final String fileName;
 
-        WriteHandler(Looper looper, String folder, int maxFileSize) {
+        WriteHandler(Looper looper, String folder, int maxFileSize, String fileName) {
             super(looper);
             this.folder = folder;
             this.maxFileSize = maxFileSize;
+            this.fileName = fileName;
         }
 
         @SuppressWarnings("checkstyle:emptyblock")
@@ -43,7 +45,7 @@ public class DiskLogStrategy implements LogStrategy {
             String content = (String) msg.obj;
 
             FileWriter fileWriter = null;
-            File logFile = getLogFile(folder, Utils.getCurrentTime());
+            File logFile = getLogFile(folder, fileName + "-" + Utils.getCurrentTime());
 
             try {
                 fileWriter = new FileWriter(logFile, true);
