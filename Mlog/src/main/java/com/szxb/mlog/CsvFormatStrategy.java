@@ -25,6 +25,7 @@ public class CsvFormatStrategy implements FormatStrategy {
     private final LogStrategy logStrategy;
     private final String tag;
     private final String fileName;
+    private final String filePath;
 
     private CsvFormatStrategy(Builder builder) {
         date = builder.date;
@@ -32,6 +33,7 @@ public class CsvFormatStrategy implements FormatStrategy {
         logStrategy = builder.logStrategy;
         tag = builder.tag;
         fileName = builder.fileName;
+        filePath = builder.filePath;
     }
 
     public static Builder newBuilder() {
@@ -90,6 +92,7 @@ public class CsvFormatStrategy implements FormatStrategy {
         LogStrategy logStrategy;
         String tag = "PRETTY_LOGGER";
         String fileName = "Q8_A";
+        String filePath = "BJLogger";
 
         private Builder() {
         }
@@ -119,6 +122,11 @@ public class CsvFormatStrategy implements FormatStrategy {
             return this;
         }
 
+        public Builder filePath(String filePath) {
+            this.filePath = filePath;
+            return this;
+        }
+
         public CsvFormatStrategy build() {
             if (date == null) {
                 date = new Date();
@@ -128,7 +136,7 @@ public class CsvFormatStrategy implements FormatStrategy {
             }
             if (logStrategy == null) {
                 String diskPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                String folder = diskPath + File.separatorChar + "BJLogger";
+                String folder = diskPath + File.separatorChar + filePath;
 
                 HandlerThread ht = new HandlerThread("AndroidFileLogger." + folder);
                 ht.start();
