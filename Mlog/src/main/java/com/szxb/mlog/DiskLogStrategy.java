@@ -31,12 +31,15 @@ public class DiskLogStrategy implements LogStrategy {
         private final String folder;
         private final int maxFileSize;
         private final String fileName;
+        private final String fileType;
 
-        WriteHandler(Looper looper, String folder, int maxFileSize, String fileName) {
+
+        WriteHandler(Looper looper, String folder, int maxFileSize, String fileName, String fileType) {
             super(looper);
             this.folder = folder;
             this.maxFileSize = maxFileSize;
             this.fileName = fileName;
+            this.fileType = fileType;
         }
 
         @SuppressWarnings("checkstyle:emptyblock")
@@ -72,7 +75,8 @@ public class DiskLogStrategy implements LogStrategy {
          * @param fileWriter an instance of FileWriter already initialised to the correct file
          */
         private void writeLog(FileWriter fileWriter, String content) throws IOException {
-            fileWriter.append((char) 0xFEFF);//解决导出csv中文乱码
+            //解决导出csv中文乱码
+            fileWriter.append((char) 0xFEFF);
             fileWriter.append(content);
         }
 
@@ -81,18 +85,18 @@ public class DiskLogStrategy implements LogStrategy {
             File folder = new File(folderName);
             if (!folder.exists()) {
                 //TODO: What if folder is not created, what happens then?
-                folder.mkdirs();
+                boolean mkdirs = folder.mkdirs();
             }
 
             int newFileCount = 0;
             File newFile;
             File existingFile = null;
 
-            newFile = new File(folder, String.format("%s_%s.csv", fileName, newFileCount));
+            newFile = new File(folder, String.format("%s_%s.%s", fileName, newFileCount, fileType));
             while (newFile.exists()) {
                 existingFile = newFile;
                 newFileCount++;
-                newFile = new File(folder, String.format("%s_%s.csv", fileName, newFileCount));
+                newFile = new File(folder, String.format("%s_%s.%s", fileName, newFileCount, fileType));
             }
 
             if (existingFile != null) {
